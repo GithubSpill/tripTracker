@@ -1,13 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import { StyleSheet } from "react-native";
+import { Pressable } from "react-native-gesture-handler";
 
 export default function Dashboard() {
   const styles = getStyles();
 
   return (
     <View style={{ flex: 1, padding: 16 }}>
-      <View style={[ styles.earningContainer]}>
+      <View style={[ styles.defaultCard]}>
         <Text>Earning For this week</Text>
         <View style={styles.moneyContainer}>
           <Text style={styles.moneyText}>$456.95</Text>
@@ -15,23 +16,48 @@ export default function Dashboard() {
       </View>
 
 
-      <View style={{ marginTop: 180 }}>
+      <View >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={[styles.summaryCard, { flex: 1, marginRight: 8 }]}>
+          <View style={[styles.defaultCard, { flex: 1, marginRight: 8 }]}>
             <Text>Driving Distance</Text>
             <Text style={{ fontSize: 28, fontWeight: "bold", marginTop: 10 }}>546 KM</Text>
           </View>
-          <View style={[styles.summaryCard, { flex: 1, marginLeft: 8 }]}>
+          <View style={[styles.defaultCard, { flex: 1, marginLeft: 8 }]}>
             <Text>Time Driven</Text>
               <Text style={{ fontSize: 28, fontWeight: "bold", marginTop: 10 }}>43.5 Hours</Text>
           </View>
         </View>
       </View>
 
-      <View style={styles.hourlyEarningCard}>
+      <View style={styles.defaultCard}>
         <Text>Hourly Earning</Text>
         <Text style={styles.hourlyEarningText}>$15.00/hr</Text>
       </View>
+
+      <View
+        style={{
+          position: "absolute",
+          bottom: 24,
+          right: 24,
+          zIndex: 10,
+        }}
+      >
+        <Pressable
+          style={{
+        backgroundColor: "#27ae60",
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 24,
+        elevation: 2,
+          }}
+          onPress={() => alert("Start Trip pressed!")}
+        >
+          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
+        Start Trip
+          </Text>
+        </Pressable>
+      </View>
+
     </View>
 
     
@@ -41,59 +67,33 @@ export default function Dashboard() {
 
 function getStyles() {
   return StyleSheet.create({
-    earningContainer: {
-      position: 'absolute',
-      top: 30,
-      left: 10,
-      right: 10,
-      padding: 32, // increased padding
-      backgroundColor: '#fff',
-      borderRadius: 20, // slightly larger radius
-      elevation: 10,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 6 },
-      shadowOpacity: 0.25,
-      shadowRadius: 12,
-      alignItems: 'center',
-    },
-    summaryCard: {
-      backgroundColor: '#fff',
-      borderRadius: 20,
-      elevation: 5,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.15,
-      shadowRadius: 6,
-      alignItems: 'center',
-      padding: 24,
-    },
     moneyContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginTop: 16, // increased margin
+      marginTop: 16,
     },
     moneyText: {
-      fontSize: 40, // larger font size
+      fontSize: 40,
       color: '#27ae60',
       fontWeight: 'bold',
     },
-    hourlyEarningCard: {
-      backgroundColor: '#fff',
-      borderRadius: 20,
-      elevation: 5,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.15,
-      shadowRadius: 6,
-      alignItems: 'center',
-      padding: 24,
-      marginTop: 30,
-    },
     hourlyEarningText: {
       fontSize: 28,
-      color: '#2980b9',
+      color: '#27ae60',
       fontWeight: 'bold',
       marginTop: 10,
+    },
+    defaultCard: {
+      backgroundColor: '#fff',
+      borderRadius: 16,
+      elevation: 4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.12,
+      shadowRadius: 5,
+      alignItems: 'center',
+      padding: 20,
+      marginVertical: 10,
     },
   });
 }
