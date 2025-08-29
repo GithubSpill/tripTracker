@@ -16,16 +16,20 @@ function TimerStackGroup() {
   return (
     <TimerStack.Navigator>
       <TimerStack.Screen name="TripsScreen" component={TripsScreen} />
-      <TimerStack.Screen name="StartTrip" component={StartTrip} options={{
-        presentation: 'transparentModal',
-      }}/>
-      <TimerStack.Screen name="EndTrip" component={EndTrip} />
     </TimerStack.Navigator>
   )
 }
 
-
-
+const DashboardStack = createNativeStackNavigator();
+function DashboardStackGroup() {
+  return (
+    <DashboardStack.Navigator>
+      <DashboardStack.Screen name="Dashboard" component={Dashboard} />
+      <DashboardStack.Screen name="StartTrip" component={StartTrip} />
+      <DashboardStack.Screen name="EndTrip" component={EndTrip} />
+    </DashboardStack.Navigator>
+  )
+}
 
 const Tab = createBottomTabNavigator();
 function TabGroup() {
@@ -47,7 +51,7 @@ function TabGroup() {
       })
       }
     >
-      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="Dashboard" component={DashboardStackGroup} options={{headerShown: false, tabBarLabel: "Dashboard"}}/>
       <Tab.Screen name="TimerStackGroup" component={TimerStackGroup} options={{headerShown: false, tabBarLabel: "Trips"}}/>
       <Tab.Screen name="Receipts" component={ReceiptsScreen} />
     </Tab.Navigator>

@@ -45,15 +45,17 @@ export default function Dashboard() {
         <Pressable
           style={{
         backgroundColor: "#27ae60",
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 24,
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        justifyContent: "center",
+        alignItems: "center",
         elevation: 2,
           }}
           onPress={() => alert("Start Trip pressed!")}
         >
-          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
-        Start Trip
+          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 14, textAlign: "center" }}>
+        Start{'\n'}Trip
           </Text>
         </Pressable>
       </View>
