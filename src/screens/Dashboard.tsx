@@ -1,10 +1,22 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React, { useState } from "react";
+import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import { Pressable } from "react-native-gesture-handler";
 
+import ThirdType from "../buttons/FloatingButton";
+
 export default function Dashboard() {
   const styles = getStyles();
+
+  const [buttonEnabled, setButtonEnabled] = useState(true);
+
+  const buttonClickHandler = () => {
+    setButtonEnabled(!buttonEnabled);
+    alert(`Button clicked! ${buttonEnabled}`);
+  }
+
+
+
 
   return (
     <View style={{ flex: 1, padding: 16 }}>
@@ -34,30 +46,17 @@ export default function Dashboard() {
         <Text style={styles.hourlyEarningText}>$15.00/hr</Text>
       </View>
 
-      <View
-        style={{
-          position: "absolute",
-          bottom: 24,
-          right: 24,
-          zIndex: 10,
-        }}
-      >
-        <Pressable
-          style={{
-        backgroundColor: "#27ae60",
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        justifyContent: "center",
-        alignItems: "center",
-        elevation: 2,
-          }}
-          onPress={() => alert("Start Trip pressed!")}
-        >
-          <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 14, textAlign: "center" }}>
-        Start{'\n'}Trip
+      {/* <View style={styles.fabContainer}>
+        <Pressable style={styles.fabButton} onPress={buttonClickHandler}>
+          <Text style={styles.fabButtonText}>
+              Start{'\n'}Trip
+              
           </Text>
         </Pressable>
+      </View> */}
+
+      <View style={styles.fabContainerv3}>
+        <ThirdType />
       </View>
 
     </View>
@@ -97,5 +96,33 @@ function getStyles() {
       padding: 20,
       marginVertical: 10,
     },
+    fabButton: {
+      backgroundColor: "#27ae60",
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      justifyContent: "center",
+      alignItems: "center",
+      elevation: 2,
+    },
+    fabContainer: {
+      position: "absolute",
+      bottom: 24,
+      right: 24,
+      zIndex: 10,
+    },
+    fabButtonText: {
+      color: "#fff",
+      fontWeight: "bold",
+      fontSize: 14,
+      textAlign: "center"
+    },
+    fabContainerv3: {
+      flex: 1,
+      backgroundColor: 'white',
+      position: 'absolute',
+      bottom: 75,
+      right: 1,
+    }
   });
 }
