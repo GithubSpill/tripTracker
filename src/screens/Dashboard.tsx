@@ -46,25 +46,9 @@ export default function Dashboard() {
         <Text style={styles.hourlyEarningText}>$15.00/hr</Text>
       </View>
 
-      {/* <View style={styles.fabContainer}>
-        <Pressable style={styles.fabButton} onPress={buttonClickHandler}>
-          <Text style={styles.fabButtonText}>
-              Start{'\n'}Trip
-              
-          </Text>
-        </Pressable>
-      </View> */}
-
-      <View style={styles.fabContainerv3}>
-        <ThirdType />
-      </View>
-
     </View>
-
-    
   );
 }
-
 
 function getStyles() {
   return StyleSheet.create({
@@ -106,9 +90,10 @@ function getStyles() {
       elevation: 2,
     },
     fabContainer: {
+      flex: 1,
       position: "absolute",
-      bottom: 24,
-      right: 24,
+      bottom: 110,
+      right: 20,
       zIndex: 10,
     },
     fabButtonText: {
@@ -117,12 +102,5 @@ function getStyles() {
       fontSize: 14,
       textAlign: "center"
     },
-    fabContainerv3: {
-      flex: 1,
-      backgroundColor: 'white',
-      position: 'absolute',
-      bottom: 75,
-      right: 1,
-    }
   });
 }
