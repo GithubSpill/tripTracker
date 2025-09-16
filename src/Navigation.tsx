@@ -4,37 +4,93 @@ import Dashboard from './screens/Dashboard';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TripsScreen from './screens/TripsScreen';
 import ReceiptsScreen from './screens/ReceiptsScreen';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Export from './screens/Export';
 import StartTrip from './screens/timer/StartTrip';
-import EndTrip from './screens/timer/EndTrip';
-import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
+import { View } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
 function TabGroup() {
   return (
     <Tab.Navigator
-      screenOptions={({route, navigation}) => ({
-        tabBarIcon: ({color, size}) => {
-          let iconName: 'home' | 'car' | 'filetext1' = 'home';
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color, size, focused}) => {
+          let iconName: React.ComponentProps<typeof Ionicons>['name'] = 'home';
+          let backgroundCenterButtonColor = '#272829ff';
           if (route.name === 'Dashboard') {
-            iconName = 'home';
+            iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Trips') {
-            iconName = 'car';
+            iconName = focused ? 'car' : 'car-outline';
           } else if (route.name === 'Receipts') {
-            iconName = 'filetext1';
+            iconName = focused ? 'file-tray-full' : 'file-tray-outline';
+          } else if (route.name === 'Export') {
+            iconName = focused ? 'cloud-upload' : 'cloud-upload-outline';
+          } else if (route.name === 'Start Trip') {
+            size = 40;
+            color = '#fff';
+
+            if (focused) {
+              backgroundCenterButtonColor = '#0091d4ff';
+            }
+
+            iconName = 'add';
           }
-          return <AntDesign name={iconName} size={size} color={color} />;
+
+          if (route.name === 'Start Trip') {
+            return (
+            <View style={{ 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              backgroundColor: backgroundCenterButtonColor,
+              width: 80,
+              height: 80,
+              borderRadius: 40,
+              marginBottom: 30,
+
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2
+              },
+              shadowOpacity: 0.3,
+              shadowRadius: 4,
+              elevation: 5
+            }}>
+              <Ionicons name={iconName} size={size} color={color} />
+            </View>
+          );
+          }
+          else {
+            return (
+              <View style={{ 
+              flex: 1, 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              marginBottom: -20
+            }}>
+              <Ionicons name={iconName} size={size} color={color} />
+            </View>
+            );
+          }
         },
         tabBarActiveTintColor: '#0091d4ff',
-        tabBarStyle: { ...styles.tabBar, alignSelf: 'center' },
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          // height: 70,
+          // position: 'absolute',
+          // bottom: 50,
+          // left: 20,
+          // right: 20,
+          // borderRadius: 50,
+        }
       })}
     >
-      <Tab.Screen name="Dashboard" component={Dashboard} options={{tabBarLabel: "Dashboard"}}/>
-      <Tab.Screen name="Trips" component={TripsScreen} options={{tabBarLabel: "Trips"}}/>
-      <Tab.Screen name="Receipts" component={ReceiptsScreen} options={{tabBarLabel: "Receipts"}}/>
+      <Tab.Screen name="Dashboard" component={Dashboard} options={{tabBarLabel: "Dashboard", title: "Home"}}/>
+      <Tab.Screen name="Trips" component={TripsScreen} options={{tabBarLabel: "Trips", title: "Your Trips"}}/>
+      <Tab.Screen name="Start Trip" component={StartTrip} options={{tabBarLabel: "Start Trip", title: "Start a New Trip"}}/>
+      <Tab.Screen name="Receipts" component={ReceiptsScreen} options={{tabBarLabel: "Receipts", title: "Your Receipts"}}/>
+      <Tab.Screen name="Export" component={Export} options={{tabBarLabel: "Export", title: "Export Data"}}/>
     </Tab.Navigator>
   )
 }
@@ -47,26 +103,3 @@ export default function Navigation() {
     </NavigationContainer>
   )
 }
-const screenWidth = Dimensions.get('window').width;
-const tabBarWidth = Math.min(screenWidth * 0.95, 400);
-const marginLeft = (screenWidth - tabBarWidth) / 2;
-
-const styles = StyleSheet.create({
-  tabBar: {
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    backgroundColor: '#fff',
-    borderRadius: 30,
-    elevation: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    paddingTop: 5,
-    width: tabBarWidth,
-    marginLeft: marginLeft,
-  },
-});
-
-export { styles };
